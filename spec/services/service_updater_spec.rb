@@ -1,5 +1,44 @@
 RSpec.describe ServiceUpdater do
   subject(:service_updater) { described_class.new(latest_metadata) }
+  let(:valid) { true }
+
+  describe '#add_branch' do
+    let(:latest_metadata) { metadata_fixture('branching') }
+
+    context 'adding a new branch object' do
+      let(:branch) do
+        NewFlowBranchGenerator.new.to_metadata
+      end
+      let(:branch_uuid) { branch.keys.first }
+      let(:uuid) { latest_metadata['flow'].keys[1] }
+
+      before do
+        service_updater.add_branch(
+          branch: branch,
+          uuid: uuid
+        )
+      end
+
+      it 'should add the branch object to the latest metadata' do
+        expect(
+          service_updater.latest_metadata['flow'][branch_uuid]
+        ).to be_present
+      end
+
+      it 'should create valid service flow metadata' do
+        expect(
+          MetadataPresenter::ValidateSchema.validate(
+            service_updater.latest_metadata['flow'], 'flow.base'
+          )
+        ).to be(valid)
+      end
+
+      it 'should update the previous flow objects default next uuid' do
+        previous_object = service_updater.latest_metadata['flow'][uuid]
+        expect(previous_object['next']['default']).to eq(branch_uuid)
+      end
+    end
+  end
 
   describe '#create_flow' do
     let(:latest_metadata) { metadata_fixture('no_flow_service') }
@@ -9,7 +48,6 @@ RSpec.describe ServiceUpdater do
     end
 
     context 'creating flow objects from existing pages' do
-      let(:valid) { true }
       let(:service_flow) do
         {
           'cf6dc32f-502c-4215-8c27-1151a45735bb' => {
