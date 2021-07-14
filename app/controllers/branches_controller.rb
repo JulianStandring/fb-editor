@@ -1,6 +1,9 @@
 class BranchesController < FormController
   default_form_builder GOVUKDesignSystemFormBuilder::FormBuilder
 
+  def new
+  end
+
   def create
     branch = NewFlowBranchGenerator.new
     ServiceUpdater.new(service_metadata).tap do |service_updater|

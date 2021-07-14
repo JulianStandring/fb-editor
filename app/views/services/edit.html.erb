@@ -28,6 +28,10 @@
             target: '_blank' %>
           </li>
           <li data-action="add"><a href="#add-page-here">Add page here</a></li>
+          <li data-action="edit">
+            <%= link_to 'Set next step',
+              new_branch_path(service.service_id, page.uuid) %>
+          </li>
           <li data-action="delete">
             <% unless page.type == 'page.start' %>
               <%= link_to t('actions.delete_page'),
