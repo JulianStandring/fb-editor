@@ -14,7 +14,7 @@ class BranchesController < FormController
   end
 
   def edit
-    @branch = service.flow.find(params[:branch_id]) # branch flow uuid
+    @branch = service.flow.find(params[:flow_uuid]) # branch flow uuid
     # get all the questions and answers etc
     # render  edit.html.erb
   end
