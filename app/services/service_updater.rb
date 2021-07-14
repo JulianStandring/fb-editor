@@ -16,24 +16,12 @@ class ServiceUpdater
     false
   end
 
-  def add_branch(branch:, uuid:)
-    latest_metadata['flow'].merge!(branch)
-    update_linked_flow_object(
-      branch_uuid: branch.keys.first,
-      flow_uuid: uuid
-    )
-  end
-
   def create_flow
     latest_metadata['flow'] = service_flow_from_pages
     remove_start_page_steps
   end
 
   private
-
-  def update_linked_flow_object(branch_uuid:, flow_uuid:)
-    latest_metadata['flow'][flow_uuid]['next']['default'] = branch_uuid
-  end
 
   def service_flow_from_pages
     latest_metadata['pages'].each_with_index.inject({}) do |hash, (page, index)|
