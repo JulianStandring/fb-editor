@@ -3,7 +3,6 @@ class BranchesController < FormController
 
   def new
     @branch = Branch.new(previous_flow_object: previous_flow_object, service: service)
-    
   end
 
   def create
