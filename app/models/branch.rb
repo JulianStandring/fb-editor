@@ -26,4 +26,8 @@ class Branch
 
     results.flatten(1)
   end
+
+  def previous_flow_page
+    previous_flow_object.title
+  end
 end
