@@ -2,7 +2,8 @@ class BranchesController < FormController
   default_form_builder GOVUKDesignSystemFormBuilder::FormBuilder
 
   def new
-    @branch = Branch.new(previous_flow_object: previous_flow_object)
+    @branch = Branch.new(previous_flow_object: previous_flow_object, service: service)
+    
   end
 
   def create

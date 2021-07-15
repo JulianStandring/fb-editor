@@ -1,1 +1,15 @@
-hello
+<% if @branch.errors.present? %>
+  <div class="govuk-grid-column-two-thirds govuk-error-summary">
+    <% @branch.errors.each do |error|  %>
+      <span class="govuk-error-message"><%= error.message %></span>
+    <% end %>
+  </div>
+<% end %>
+
+<h1>Branching page</h1>
+
+<%= form_for @branch, url: branches_path(service.service_id), method: :post do |f| %>
+  <%= f.hidden_field :flow_uuid, value: @branch.previous_flow_uuid %>
+
+  <%= f.submit t('actions.save'), class: 'editor-button govuk-button fb-govuk-button' %>
+<% end %>
