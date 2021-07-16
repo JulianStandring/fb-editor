@@ -1,12 +1,26 @@
 RSpec.describe Branch do
   subject(:branch) do
-    described_class.new(
+    described_class.new(branch_attributes)
+  end
+  let(:branch_attributes) do
+    {
       previous_flow_object: previous_flow_object,
       service: service
-    )
+    }.merge(attributes)
   end
   let(:previous_flow_object) do
     service.find_page_by_url('holiday')
+  end
+
+  describe '#conditionals_attributes=' do
+    let(:attributes) do
+      {
+        conditionals_attributes: [
+          {
+          }
+        ]
+      }
+    end
   end
 
   describe '#pages' do

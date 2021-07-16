@@ -2,22 +2,32 @@ class BranchesController < FormController
   default_form_builder GOVUKDesignSystemFormBuilder::FormBuilder
 
   def new
-    @branch = Branch.new(previous_flow_object: previous_flow_object, service: service)
+    @branch = Branch.new(branch_attributes)
   end
 
   def create
-    branch_creation = BranchCreation.new(branch_params)
-    if branch_creation.create
-      redirect_to edit_branch_path(service.service_id, branch_creation.branch_uuid)
-    else
-      render :new
-    end
+    byebug
+    branch_params
+    #branch_creation = BranchCreation.new(branch_params)
+
+    #if branch_creation.create
+    #  redirect_to edit_branch_path(service.service_id, branch_creation.branch_uuid)
+    #else
+    #  render :new
+    #end
   end
 
   def edit
-    @branch = service.flow.find(params[:flow_uuid]) # branch flow uuid
+    @branch = Branch.new(branch_attributes)
     # get all the questions and answers etc
     # render  edit.html.erb
+  end
+
+  def branch_attributes
+    {
+      previous_flow_object: previous_flow_object,
+      service: service
+    }
   end
 
   def previous_flow_object

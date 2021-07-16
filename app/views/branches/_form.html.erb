@@ -1,0 +1,11 @@
+<%= f.hidden_field :flow_uuid, value: @branch.previous_flow_uuid %>
+
+<%= f.fields_for :conditionals do |conditional| %>
+  <%= conditional.select :page,
+    @branch.pages,
+    include_blank: '--- Select a destination page ---' %>
+  <%= conditional.select :question,
+    @branch.previous_questions,
+    include_blank: '--Select a question--' %>
+<% end %>
+<%= f.submit t('actions.save'), class: 'editor-button govuk-button fb-govuk-button' %>
