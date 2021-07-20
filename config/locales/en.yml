@@ -1,4 +1,13 @@
 en:
+  aria:
+    flow_thumbnail: 'Form page'
+    page:
+      start: Start page
+      singlequestion: Single question page
+      multiplequestions: Multiple question page
+      checkanswers: Check your answers page
+      confirmation: Confirmation page
+      content: Content page
   default_text:
     section_heading: '[Optional section heading]'
     lede: '[Optional lede paragraph]'
@@ -61,7 +70,6 @@ en:
   pages:
     flow:
       heading: 'Pages flow'
-      step: 'Form page'
     name: 'Pages'
     create: 'Add page'
     cancel: 'Cancel'

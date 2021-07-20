@@ -8,7 +8,7 @@
 <div id="form-overview">
   <div class="container">
     <% service.pages.each do |page| %>
-      <div class="form-step" aria-label="<%= t('pages.flow.step') %>">
+      <div class="form-step" aria-label="<%= t('aria.' + page.type) %>">
 
         <%= flow_thumbnail(page, service.service_id) %>
 
