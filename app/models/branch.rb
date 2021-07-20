@@ -19,13 +19,8 @@ class Branch
   end
 
   def previous_questions
-    previous_pages = MetadataPresenter::TraversedPages.new(
-      service,
-      {},
-      previous_flow_object
-    ).all.push(previous_flow_object)
     results = previous_pages.map do |page|
-      components = Array(page.components).select(&:support_branching?)
+      components = Array(page.components).select(&:supports_branching?)
 
       components.map do |component|
         [component.humanised_title, component.uuid]
@@ -35,7 +30,15 @@ class Branch
     results.flatten(1)
   end
 
-  def previous_flow_page
+  def previous_flow_title
     previous_flow_object.title
+  end
+
+  def previous_pages
+    MetadataPresenter::TraversedPages.new(
+      service,
+      {},
+      previous_flow_object
+    ).all.push(previous_flow_object)
   end
 end

@@ -1,4 +1,4 @@
-<h1>After "<%= @branch.previous_flow_page %>"</h1>
+<h1>After "<%= @branch.previous_flow_title %>"</h1>
 
 <%= form_for @branch, url: branches_path(service.service_id), method: :post do |f| %>
   <%= render 'form', f: f %>
