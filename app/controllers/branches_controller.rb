@@ -3,19 +3,18 @@ class BranchesController < FormController
 
   def new
     @branch = Branch.new(branch_attributes)
-    @branch.conditionals << OpenStruct.new
+
+    @branch.conditionals << Conditional.new(expressions: [OpenStruct.new])
   end
 
   def create
-    byebug
-    branch_params
-    #branch_creation = BranchCreation.new(branch_params)
+    branch_creation = BranchCreation.new(branch_params)
 
-    #if branch_creation.create
-    #  redirect_to edit_branch_path(service.service_id, branch_creation.branch_uuid)
-    #else
-    #  render :new
-    #end
+    if branch_creation.create
+      redirect_to edit_branch_path(service.service_id, branch_creation.branch_uuid)
+    else
+      render :new
+    end
   end
 
   def edit
@@ -40,7 +39,8 @@ class BranchesController < FormController
     {
       service_id: service.service_id,
       latest_metadata: service_metadata,
-      previous_flow_uuid: params[:branch][:flow_uuid]
+      previous_flow_uuid: params[:branch][:flow_uuid],
+      conditionals: params[:branch][:conditionals_attributes]
     }
   end
 end

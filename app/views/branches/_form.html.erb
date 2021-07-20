@@ -4,9 +4,12 @@
   <%= conditional.select :page,
     @branch.pages,
     include_blank: '--- Select a destination page ---' %>
-  <%= conditional.select :question,
-    @branch.previous_questions,
-    include_blank: '--Select a question--' %>
+
+  <%= conditional.fields_for :expressions do |expression| %>
+    <%= expression.select :question,
+      @branch.previous_questions,
+      include_blank: '--Select a question--' %>
+  <% end %>
 <% end %>
 
 <%= f.select :default_next,
