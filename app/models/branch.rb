@@ -1,6 +1,14 @@
 class Branch
   include ActiveModel::Model
-  attr_accessor :previous_flow_object, :service
+  attr_accessor :previous_flow_object, :service, :default_next
+
+  def conditionals
+    @conditionals ||= []
+  end
+
+  def conditionals_attributes=(hash)
+    hash
+  end
 
   def previous_flow_uuid
     previous_flow_object.uuid

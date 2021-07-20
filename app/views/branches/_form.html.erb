@@ -8,4 +8,9 @@
     @branch.previous_questions,
     include_blank: '--Select a question--' %>
 <% end %>
+
+<%= f.select :default_next,
+  @branch.pages,
+  include_blank: '--- Select a destination page ---' %>
+
 <%= f.submit t('actions.save'), class: 'editor-button govuk-button fb-govuk-button' %>

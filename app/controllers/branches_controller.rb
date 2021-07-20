@@ -3,6 +3,7 @@ class BranchesController < FormController
 
   def new
     @branch = Branch.new(branch_attributes)
+    @branch.conditionals << OpenStruct.new
   end
 
   def create
