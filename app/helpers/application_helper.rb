@@ -13,7 +13,7 @@ module ApplicationHelper
            end
     link_to edit_page_path(parent_id, page.uuid), class: "form-step_thumbnail #{type}", 'aria-hidden': true do
       concat image_pack_tag('thumbnails/thumbs_header.png', class: 'header')
-      concat tag.span(t('actions.edit') + ': ', class: 'govuk-visually-hidden')
+      concat tag.span("#{t('actions.edit')}: ", class: 'govuk-visually-hidden')
       concat tag.span(heading, class: 'text')
       concat image_pack_tag("thumbnails/thumbs_#{type}.jpg", class: 'body')
     end
